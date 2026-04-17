@@ -298,7 +298,7 @@ async def get_database_stats():
             "engine_keys": list(_engine_cache.keys()),
         },
         "config": {
-            "database_type": "PostgreSQL",
+            "database_type": "SQLite" if "sqlite" in settings.database_url.lower() else "PostgreSQL",
             "pool_size": settings.database_pool_size,
             "max_overflow": settings.database_max_overflow,
             "total_connections": settings.database_pool_size + settings.database_max_overflow,

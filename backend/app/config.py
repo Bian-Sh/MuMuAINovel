@@ -16,9 +16,10 @@ config_logger = logging.getLogger(__name__)
 
 # 数据库配置：PostgreSQL
 # 从环境变量获取数据库URL
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://mumuai:password@localhost:5432/mumuai_novel")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///data/ai_story.db")
 
-config_logger.debug(f"数据库类型: PostgreSQL")
+is_sqlite = "sqlite" in DATABASE_URL.lower()
+config_logger.debug(f"数据库类型: {'SQLite' if is_sqlite else 'PostgreSQL'}")
 config_logger.debug(f"数据库URL: {DATABASE_URL}")
 
 class Settings(BaseSettings):
